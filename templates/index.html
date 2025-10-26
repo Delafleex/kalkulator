@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Pink Flask</title>
+    <style>
+        body {
+            background-color: #f8c2c2;
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .kalkulator {
+            background-color: #e995a3;
+            padding: 20px;
+            border-radius: 10px;
+            width: 250px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        }
+        .layar {
+            width: 100%;
+            height: 60px;
+            font-size: 28px;
+            text-align: right;
+            border: none;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            padding-right: 10px;
+            color: #4a4a4a;
+            background-color: #d58594;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+        button {
+            font-size: 18px;
+            border: none;
+            border-radius: 6px;
+            padding: 12px;
+            cursor: pointer;
+            background-color: #ffffff;
+            color: #000000;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background-color: #f2f2f2;
+        }
+        .op {
+            background-color: #f1aab5;
+        }
+        .eq {
+            background-color: #f1aab5;
+        }
+        /* Tombol AC dan DEL setengah-setengah */
+        .acdel-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+            margin-top: 10px;
+        }
+        .ac {
+            background-color: #8b0e0e;
+            color: white;
+            font-weight: bold;
+        }
+        .del {
+            background-color: #c0392b;
+            color: white;
+            font-weight: bold;
+        }
+        .ac:hover, .del:hover {
+            background-color: #a11b1b;
+        }
+    </style>
+</head>
+<body>
+    <form method="POST" class="kalkulator">
+        <input type="text" class="layar" name="ekspresi" value="{{ ekspresi or hasil }}" readonly>
+        <div class="grid">
+            {% for t in ["7","8","9","/","4","5","6","X","1","2","3","-","0",",","=","+"] %}
+            <button type="submit" name="tombol" value="{{ t }}"
+                class="{% if t in ['/', 'X', '-', '+', '='] %}op{% endif %}">
+                {{ t }}
+            </button>
+            {% endfor %}
+        </div>
+        <div class="acdel-container">
+            <button type="submit" name="tombol" value="AC" class="ac">AC</button>
+            <button type="submit" name="tombol" value="DEL" class="del">DEL</button>
+        </div>
+    </form>
+</body>
+</html>
